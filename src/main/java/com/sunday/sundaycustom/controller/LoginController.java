@@ -1,7 +1,6 @@
 package com.sunday.sundaycustom.controller;
 
 import com.sunday.sundaycustom.dto.LoginRequest;
-import com.sunday.sundaycustom.model.User;
 import com.sunday.sundaycustom.security.JwtTokenProvider;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.naming.AuthenticationException;
+
 
 @RestController
 @RequestMapping("/api")
@@ -29,18 +28,18 @@ public class LoginController {
 
     @PostMapping("/login")
     public ResponseEntity<String> login(@RequestBody LoginRequest loginRequest) {
-        String username = loginRequest.getUserid ();
+        String userid = loginRequest.getUserid ();
         String password = loginRequest.getPassword();
 
         try {
             // 사용자 인증
             Authentication authentication = authenticationManager.authenticate(
-                    new UsernamePasswordAuthenticationToken(username, password)
+                    new UsernamePasswordAuthenticationToken(userid, password)
             );
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
             // JWT 토큰 발급
-            String token = jwtTokenProvider.generateToken(username);
+            String token = jwtTokenProvider.generateToken(userid);
             return ResponseEntity.ok(token);
         } catch (org.springframework.security.core.AuthenticationException e) {
             return ResponseEntity.status( HttpStatus.UNAUTHORIZED).body("Authentication failed: " + e.getMessage());

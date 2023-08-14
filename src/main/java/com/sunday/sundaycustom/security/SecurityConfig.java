@@ -27,11 +27,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/api/login").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/images/**", "/assets/**", "/signup").permitAll()
+                .antMatchers("/api/login").permitAll()  // 특정 API 엔드포인트에 대한 허용
                 .anyRequest().authenticated()
                 .and()
-                .addFilterBefore(new JwtTokenFilter (jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
+                .addFilterBefore(new JwtTokenFilter(jwtTokenProvider), UsernamePasswordAuthenticationFilter.class);
     }
+
 
     @Override
     @Bean
