@@ -27,7 +27,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/", "/css/**", "/js/**", "/images/**", "/assets/**", "/signup").permitAll()
+                .antMatchers("/", "/css/**", "/js/**", "/images/**", "/assets/**", "/signup","/customize").permitAll()
                 .antMatchers("/api/login").permitAll()  // 특정 API 엔드포인트에 대한 허용
                 .anyRequest().authenticated()
                 .and()

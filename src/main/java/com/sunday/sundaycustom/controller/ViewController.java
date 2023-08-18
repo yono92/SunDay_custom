@@ -9,7 +9,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class ViewController {
 
     @GetMapping("/signup")
-    public String ShowSginupForm(){
+    public String ShowSginupForm() {
         return "signup";
+    }
+
+    @GetMapping("/customize")
+    public String ShowCustomize() {
+        return "customize";
     }
 }
